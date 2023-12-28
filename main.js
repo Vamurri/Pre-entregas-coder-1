@@ -1,12 +1,9 @@
 
 let continuar = true;
-do {
 let nombre = prompt("Ingrese su nombre");
 let direccion= prompt("ingrese su direccion");
 alert("¡Bienvenido a vintagedecosoporte, " + nombre + "!")
-
-
-
+do {
 alert("¿Qué necesita?");
 alert("Ingrese 1 si está en busca de mantas, 2 si busca fundas, 3 si busca una restauración, 4 si busca cortinas");
 let necesidad = Number(prompt("Ingrese lo que necesita"));
