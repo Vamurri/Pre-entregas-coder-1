@@ -146,6 +146,10 @@ function darMedidas(necesidad) {
                 cliente.detalles.medidas = tamañoFunda;
                 cliente.detalles.tipoFunda = tipoFunda;
             }
+            adquirirMas = adquirirOtroProducto();
+    if (!adquirirMas) {
+        return "Usted ha cancelado la selección.";
+    }
             return "Usted ha ingresado fundas.";
         case 3:
             let cosaRestaurar = prompt("Ingrese cosa a restaurar: sillas, mesas, fundas, cortinas, etc.");
