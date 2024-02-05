@@ -1,9 +1,10 @@
 
 let continuar = true;
 let nombre = prompt("Ingrese su nombre");
-let direccion= prompt("ingrese su direccion");
-alert("¡Bienvenido a vintagedecosoporte, " + nombre + "!")
-do {
+let direccion = prompt("ingrese su direccion");
+let saludo = document.getElementById("saludo");
+saludo.innerHTML = "¡Bienvenido a vintagedecosoporte, " + nombre + "!"
+do{
 alert("¿Qué necesita?");
 alert("Ingrese 1 si está en busca de mantas, 2 si busca fundas, 3 si busca una restauración, 4 si busca cortinas");
 let necesidad = Number(prompt("Ingrese lo que necesita"));
@@ -83,6 +84,9 @@ function ingresarCantidad(mensaje) {
     } while (isNaN(cantidad) || cantidad <= 0);
     return cantidad;
 }
+function saludar(){
+    alert("Gracias "+ nombre +" por elegirnos, ett:@VINTAGEDECOSOPORTE.");
+}
 
 function darMedidas(necesidad) {
     let adquirirMas = true;
@@ -146,15 +150,12 @@ function darMedidas(necesidad) {
                 cliente.detalles.medidas = tamañoFunda;
                 cliente.detalles.tipoFunda = tipoFunda;
             }
-            adquirirMas = adquirirOtroProducto();
-    if (!adquirirMas) {
-        return "Usted ha cancelado la selección.";
-    }
             return "Usted ha ingresado fundas.";
         case 3:
             let cosaRestaurar = prompt("Ingrese cosa a restaurar: sillas, mesas, fundas, cortinas, etc.");
             alert(`Comuníquese con este número +54 11 5566-8998 para organizar cómo se va a realizar la restauración.`);
             return "Usted ha ingresado restauración.";
+            continuar=adquirirOtroProducto();
         case 4:
             alert("¿Está buscando cortinas hechas o a medida?");
     let tipoCortina = prompt("Ingrese 'hechas' o 'a medida': ").toLowerCase();
@@ -172,6 +173,7 @@ function darMedidas(necesidad) {
             informarContactoEspecial();
             return "No hay suficiente stock de cortinas disponibles.";
         }
+        continuar=adquirirOtroProducto();
     } else if (tipoCortina === 'a medida') {
         let medidaCortina = prompt("Por favor, ingrese las medidas deseadas para las cortinas:");
         let estiloCortina = prompt("Ingrese el estilo (opcional):");
@@ -184,7 +186,6 @@ function darMedidas(necesidad) {
         default:
             return "Instrucción no válida.";
         }
-        adquirirMas = adquirirOtroProducto();
     }
 }
 function mostrarCarrito(carrito) {
@@ -208,27 +209,21 @@ function mostrarCarrito(carrito) {
         }
     }
 }
-
-function saludar(){
-    alert("Gracias "+ nombre +" por elegirnos, ett:@VINTAGEDECOSOPORTE.");
+function adquirirOtroProducto() {
+    let opcion = prompt("¿Desea adquirir otro producto? Ingrese 'sí' o 'no': ").toLowerCase();
+    return opcion === 'sí' || opcion === 'si';
 }
 let resultado = darMedidas(necesidad);
 mostrarCarrito(cliente.carrito);
 let precioFinalCompra = calcularPrecioFinal(cliente.carrito);
-saludar();
-
 
 console.log("Precio final de la compra:", precioFinalCompra);
 console.log(cliente);
 console.log("Stock de mantas actualizado:", stockMantas);
 console.log("Stock de fundas actualizado:", stockFundas);
 console.log("Stock de cortinas actualizado:", stockCortinas);
-
-function adquirirOtroProducto() {
-        let opcion = prompt("¿Desea adquirir otro producto? Ingrese 'sí' o 'no': ").toLowerCase();
-        return opcion === 'sí' || opcion === 'si';
-    }
 continuar=adquirirOtroProducto();
-}while(continuar);
 
+}while(continuar);
+saludar();
 
